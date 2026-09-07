@@ -1,10 +1,12 @@
 import type { LessonSection } from "@/types";
+import { DIAGRAM_REGISTRY } from "@/components/learning/diagrams/registry";
 
 type Block =
   | { type: "heading"; text: string }
   | { type: "paragraph"; text: string }
   | { type: "list"; items: string[] }
-  | { type: "note"; items: string[] };
+  | { type: "note"; items: string[] }
+  | { type: "diagram"; id: string };
 
 function parseContent(content: string): Block[] {
   const lines = content.split("\n");
@@ -47,6 +49,11 @@ function parseContent(content: string): Block[] {
       flushParagraph();
       flushList();
       noteLines.push(line.slice(2));
+    } else if (line.startsWith("@diagram:")) {
+      flushParagraph();
+      flushList();
+      flushNote();
+      blocks.push({ type: "diagram", id: line.slice("@diagram:".length) });
     } else if (line === "") {
       flushParagraph();
       flushList();
@@ -100,6 +107,18 @@ function BlockList({ blocks }: { blocks: Block[] }) {
                 ))}
               </div>
             );
+          case "diagram": {
+            const Diagram = DIAGRAM_REGISTRY[block.id];
+            if (!Diagram) return null;
+            return (
+              <div
+                key={index}
+                className="rounded-xl border border-border bg-muted/30 px-4 py-5"
+              >
+                <Diagram />
+              </div>
+            );
+          }
           case "paragraph":
           default:
             return (
