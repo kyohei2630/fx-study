@@ -2,6 +2,90 @@ import type { Quiz } from "@/types";
 
 export const QUIZZES: Quiz[] = [
   {
+    id: "fx-basics-q1",
+    lessonId: "fx-basics",
+    question: "自分が「買う」ときに使う価格はどちらですか？",
+    options: [
+      { id: "a", label: "Ask" },
+      { id: "b", label: "Bid" },
+      { id: "c", label: "スプレッド" },
+      { id: "d", label: "pips" },
+    ],
+    answer: "a",
+    explanation: "Askが買うときの価格、Bidが売るときの価格です。",
+  },
+  {
+    id: "fx-basics-q2",
+    lessonId: "fx-basics",
+    question: "レバレッジについての説明として正しいものはどれですか？",
+    options: [
+      { id: "a", label: "利益だけを増やす道具である" },
+      { id: "b", label: "倍率が高いほどリスクも比例して大きくなる" },
+      { id: "c", label: "証拠金と無関係に決まる" },
+      { id: "d", label: "スプレッドの別名である" },
+    ],
+    answer: "b",
+    explanation:
+      "レバレッジは資金効率を上げる道具であり、倍率が高いほど損失も同じ倍率で拡大します。",
+  },
+  {
+    id: "fx-basics-q3",
+    lessonId: "fx-basics",
+    question: "「損失1に対して利益2を狙う」という考え方を表す用語はどれですか？",
+    options: [
+      { id: "a", label: "スワップ" },
+      { id: "b", label: "リスクリワード" },
+      { id: "c", label: "ロット" },
+      { id: "d", label: "必要証拠金" },
+    ],
+    answer: "b",
+    explanation:
+      "損失と利益の狙う比率を表すのがリスクリワードです。この例は1:2にあたります。",
+  },
+  {
+    id: "dow-theory-q1",
+    lessonId: "dow-theory",
+    question: "上昇トレンドが継続していると判断できる高値・安値の並びはどれですか？",
+    options: [
+      { id: "a", label: "LL → LH → LL → LH" },
+      { id: "b", label: "HH → HL → HH → HL" },
+      { id: "c", label: "HHのみが単発で出る" },
+      { id: "d", label: "高値・安値が一定の範囲を往復する" },
+    ],
+    answer: "b",
+    explanation:
+      "上昇トレンドの継続は、HH（切り上げ高値）とHL（切り上げ安値）が繰り返される並びで判断します。",
+  },
+  {
+    id: "dow-theory-q2",
+    lessonId: "dow-theory",
+    question:
+      "上昇トレンド中にHHが1回出現しました。このアプリの考え方として正しいものはどれですか？",
+    options: [
+      { id: "a", label: "HHが出たので無条件に買いエントリーする" },
+      { id: "b", label: "HH単独では判断せず、他の材料と合わせて検討する" },
+      { id: "c", label: "HHが出た時点でトレンドは終了したとみなす" },
+      { id: "d", label: "HHはダウ理論と無関係なので無視する" },
+    ],
+    answer: "b",
+    explanation:
+      "「HHが出た＝買い」という単純化はこのアプリでは正解として扱いません。上位時間足や重要価格帯など他の材料と合わせて総合的に判断します。",
+  },
+  {
+    id: "dow-theory-q3",
+    lessonId: "dow-theory",
+    question: "上昇トレンド中に一時的に価格が下がって形成される安値を何と呼びますか？",
+    options: [
+      { id: "a", label: "戻り高値" },
+      { id: "b", label: "押し安値" },
+      { id: "c", label: "重要安値" },
+      { id: "d", label: "最安値" },
+    ],
+    answer: "b",
+    explanation:
+      "上昇トレンド中の一時的な下落で形成される安値が押し安値です。下降トレンドの一時的な上昇で形成される高値は戻り高値と呼びます。",
+  },
+  {
     id: "candlestick-q1",
     lessonId: "candlestick",
     question: "ローソク足の「実体」を構成する2つの価格はどれですか？",
