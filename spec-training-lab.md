@@ -1360,3 +1360,32 @@ MVPでも、「教材が薄い状態」では完成扱いにしない。最低�
 - **Phase 9〜13(Hypothesis Lab・Backtest・Strategy・Trade Journal・Analytics)**: 既存実装を新仕様と突き合わせて調査した結果、統計(`src/lib/analysis/stats.ts`: Win Rate/Avg Win/Avg Loss/Avg R/Expectancy/Profit Factor/Max Drawdown/連勝連敗/サンプル数信頼度バンド)・戦略Version管理・改善ヒント(`ImprovementHint.tsx`: Observation→User Decision→New Versionの流れを厳守し自動書き換えなし)・Before/After分離済みトレード記録など、新仕様の要求を既にほぼ満たしていると確認。見つかった実質的なギャップ2点を修正:
   - `Hypothesis.verificationCount`が常に0のまま更新されない死んだフィールドだったため、型から削除し、`HypothesesClient`で紐づく`Backtest`件数から都度計算する方式に変更(仮説→検証のサイクルが実際に見えるように)。
   - トレード記録(`Trade`)に観察記録・チャート練習で既に使っている`structure`(相場構造)・`priceAction`(Price Action)フィールドを追加し、新仕様21章の記録項目との整合性を高めた(CSV出力にも反映)。
+- **Phase 14(改善・品質確認)**: 完了。全Phase終了時点で`npm run lint` / `npm test`(13ファイル72件) / `npm run build`(50ルート)が全てグリーンであることを再確認。GitHub→Vercelの自動デプロイも最新コミットで成功を確認。最終成果物は本ファイル末尾の「最終成果物サマリ」を参照。
+
+---
+
+## 最終成果物サマリ(新仕様61章準拠)
+
+1. **実装した機能**: ブランディング/13項目ナビゲーション、学習システム(理解確認ゲート・能力マップ・復習・図解埋め込み)、15レッスンの教材、チャートトレーニング17種(判断困難対応)、Price Action教材、観察記録(NO TRADE対応)、シナリオ訓練、チャートリプレイ、仮説・バックテスト・戦略Version管理・トレード記録・分析(統計/条件別分析/サンプル数信頼度)、PWA自動更新、JSON/CSVバックアップ。
+2. **主なファイル**: `src/data/lessons/`(教材データ)、`src/lib/learning/`(進捗・クイズ・能力マップ)、`src/components/learning/diagrams/`(図解)、`src/lib/chart/`(チャート生成・採点)、`src/components/scenarios/`・`src/components/chart-replay/`(Phase 7-8新規機能)、`src/lib/analysis/`(統計)、`src/db/schema.ts`(Dexieスキーマ、v1→v2)。
+3. **データ構造**: `src/types/`配下(learning/research/scenario/strategy/trade/common/improvement)、Dexieテーブル14種。
+4. **教材数**: レッスン15本(既存12本 + 新規fx-basics/dow-theory/price-action)。
+5. **図解数**: 5種(candlestick-anatomy, trend-structure, pullback-steps, pin-bar, engulfing)。
+6. **チャート問題数**: 17種類(高値・安値系10 + 構造系5 + 環境判定2、いずれも無限に問題を生成可能なプロシージャル生成)。
+7. **Quiz数**: 27問(学習レッスン用)。
+8. **テスト結果**: 13ファイル72件、全てパス。
+9. **lint結果**: エラーなし。
+10. **build結果**: 成功(50ルート、静的生成)。
+11. **未実装項目**:
+    - Chart TrainingへのPrice Actionパターン認識問題(Pin Bar/Engulfing等)の統合。
+    - 未来を隠したチャートによるNO TRADE専用の採点付きチャート問題(Chart Replayで代替する形は実装済み)。
+    - チャートリプレイ結果の履歴保存(現在は毎回リセットされる練習ツール)。
+    - LEVEL1〜11の教材本文はFX基礎・ローソク足・高値安値・ダウ理論・市場構造・トレンドレンジ・重要価格帯・マルチタイムフレーム・Price Action・インジケーター(EMA/BB/ATR/RSI/MACD)を実装済みだが、各レッスンを新仕様8章の20項目フル構造(Good/Bad Example・Practice Task等を独立フィールド化)には未移行(現状は1つの`content`文字列に統合、`sections`型は将来の拡張用に用意済み)。
+12. **技術的課題**:
+    - `generateCandles`のランダムウォーク生成器は特定のローソク足パターン(Pin Bar等)を意図的に出現させられない。
+    - Dexieスキーマは今回初めてv1→v2の移行を経験した(`scenarios`テーブル追加)。今後さらにテーブルを追加する際も、既存ユーザーのローカルデータを壊さない形での移行を継続する必要がある。
+13. **今後の拡張候補**:
+    - Chart Training生成器の拡張によるPrice Actionパターン問題の実装。
+    - チャートリプレイの結果履歴をDB保存し、Analyticsと連携する。
+    - LEVEL1〜11の教材をより粒度の細かい`LessonSection`構造(Good Example/Bad Example/Practice Task等)へ段階的に移行。
+    - 実データ(CSV取り込みや外部FX APIなど、新仕様5章)との連携。
