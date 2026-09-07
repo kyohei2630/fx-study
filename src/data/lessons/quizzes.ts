@@ -86,6 +86,66 @@ export const QUIZZES: Quiz[] = [
       "上昇トレンド中の一時的な下落で形成される安値が押し安値です。下降トレンドの一時的な上昇で形成される高値は戻り高値と呼びます。",
   },
   {
+    id: "price-action-q1",
+    lessonId: "price-action",
+    question: "Pin Barが出現したときの正しい扱い方はどれですか？",
+    options: [
+      { id: "a", label: "出現した瞬間に長いヒゲと逆方向へ即エントリーする" },
+      { id: "b", label: "出現位置・市場構造・上位時間足と合わせて検討する" },
+      { id: "c", label: "常に無視してよい" },
+      { id: "d", label: "実体の色だけで売買方向を決める" },
+    ],
+    answer: "b",
+    explanation:
+      "Pattern・Location・Market Structure・Higher Timeframe・Price Context・Invalidationの6要素と合わせて検討します。単体では判断しません。",
+  },
+  {
+    id: "price-action-q2",
+    lessonId: "price-action",
+    question: "Engulfing（包み足）の説明として正しいものはどれですか？",
+    options: [
+      { id: "a", label: "前のローソク足の実体を、次の実体が完全に包み込む形" },
+      { id: "b", label: "前のローソク足のヒゲだけを包む形" },
+      { id: "c", label: "必ず3本のローソク足で形成される" },
+      { id: "d", label: "インジケーターの一種である" },
+    ],
+    answer: "a",
+    explanation: "Engulfingは、前の実体を次の実体が完全に包み込むローソク足の形です。",
+  },
+  {
+    id: "price-action-q3",
+    lessonId: "price-action",
+    question: "フェイクブレイク（ダマシ）の説明として正しいものはどれですか？",
+    options: [
+      { id: "a", label: "ブレイク後にそのまま同じ方向へ伸び続けること" },
+      { id: "b", label: "ブレイクしたように見えて、すぐに元の範囲へ戻ってしまうこと" },
+      { id: "c", label: "ブレイクが一度も起きないこと" },
+      { id: "d", label: "Inside Barの別名" },
+    ],
+    answer: "b",
+    explanation:
+      "フェイクブレイクは、重要な高値・安値を超えたように見えても、すぐに元の範囲に戻ってしまう値動きです。",
+  },
+  {
+    id: "price-action-q4",
+    lessonId: "price-action",
+    question:
+      "このアプリがPrice Actionパターンを判断するときに重視する考え方として正しいものはどれですか？",
+    options: [
+      { id: "a", label: "パターンの形だけで十分に判断できる" },
+      {
+        id: "b",
+        label:
+          "Pattern・Location・Market Structure・Higher Timeframe・Price Context・Invalidationを合わせて考える",
+      },
+      { id: "c", label: "上位時間足は無視してよい" },
+      { id: "d", label: "常にインジケーターと組み合わせなければ無効である" },
+    ],
+    answer: "b",
+    explanation:
+      "パターン単体を売買シグナルとして扱わず、6つの要素を合わせて仮説を立てる材料として使います。",
+  },
+  {
     id: "candlestick-q1",
     lessonId: "candlestick",
     question: "ローソク足の「実体」を構成する2つの価格はどれですか？",

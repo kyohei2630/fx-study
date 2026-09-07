@@ -1349,4 +1349,9 @@ MVPでも、「教材が薄い状態」では完成扱いにしない。最低�
 ## 実装進捗ログ
 
 - **Phase 0(リポジトリ調査)**: 完了。既存アプリ「FX研究ノート」(`spec.md`)がNext.js 16 / React 19 / TypeScript / Tailwind v4 / Dexie / next-themes構成で実装済みと確認。技術スタックは新仕様とほぼ一致するため、既存アプリを土台に段階移行する方針を決定。
-- **Phase 1(基盤: ブランディング・ナビゲーション拡張)**: 実施中。詳細は開発者向け作業ログ・コミット履歴を参照。
+- **Phase 1(基盤: ブランディング・ナビゲーション拡張)**: 完了。FX Training Labへのリブランディング、13項目ナビゲーション(Visual Learning/Scenario Training/Chart Replayをプレースホルダーとして追加)、PWA自動更新(controllerchange時に自動リロード)を実装。
+- **Phase 2(教材システム)**: 完了。`comprehension_check`状態の接続(理解確認ゲート)、能力マップ(`computeSkillMastery`、DBスキーマ変更なし)、復習カード、クイズ採点の独立モジュール化(`src/lib/learning/quiz.ts`)、`Lesson.sections`(将来の拡張用、任意)を実装。
+- **Phase 3(教材コンテンツ: FX基礎・ダウ理論)**: 完了。既存12レッスン(ローソク足・高値安値・市場構造など)はそのまま、新規に`fx-basics`・`dow-theory`の2レッスンを追加。
+- **Phase 4(図解システム)**: 完了。`@diagram:<id>`記法とレジストリでSVG図解をレッスン本文に埋め込む仕組みを実装。candlestick-anatomy/trend-structure/pullback-stepsの3種を作成。
+- **Phase 5(Chart Training)**: 既存実装で高値安値・Swing・構造・Trend/Range問題(17種)が完成済みと確認。新仕様13章が求める「判断困難」を選択肢として明示するため、`classifyTrend`にスイング不足時の`unclear`判定を追加。
+- **Phase 6(Price Action)**: レッスン(`price-action`, 6要素フレーム: Pattern/Location/Market Structure/Higher Timeframe/Price Context/Invalidation)・図解2種(pin-bar/engulfing)・クイズ4問を追加。**Chart TrainingへのPrice Actionパターン認識問題の統合は未実装**(`generateCandles`のランダムウォーク生成器がPin Bar/Engulfing等の特定パターンを意図的に出現させる仕組みを持たないため、別途生成ロジックの拡張が必要な技術タスクとして残っている)。
