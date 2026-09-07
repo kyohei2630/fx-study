@@ -16,6 +16,10 @@ export interface Observation {
   high: number | null;
   low: number | null;
   importantLevels: string;
+  structure: string;
+  priceAction: string;
+  scenario: string;
+  noTrade: boolean;
   emaState: IndicatorState;
   bbState: IndicatorState;
   atrState: IndicatorState;

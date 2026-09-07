@@ -9,6 +9,7 @@ import type {
   Lesson,
   Observation,
   Quiz,
+  ScenarioPlan,
   Strategy,
   StrategyVersion,
   Trade,
@@ -35,3 +36,4 @@ export const tradeConditionsRepo =
 export const backtestsRepo = createRepository<Backtest>("backtests");
 export const improvementNotesRepo =
   createRepository<ImprovementNote>("improvementNotes");
+export const scenariosRepo = createRepository<ScenarioPlan>("scenarios");

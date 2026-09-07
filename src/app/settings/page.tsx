@@ -40,6 +40,7 @@ const TABLE_LABELS: Record<(typeof TABLE_NAMES)[number], string> = {
   tradeConditions: "トレード条件",
   backtests: "バックテスト",
   improvementNotes: "改善メモ",
+  scenarios: "シナリオ",
 };
 
 export default function SettingsPage() {

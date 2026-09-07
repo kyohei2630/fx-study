@@ -116,6 +116,11 @@ export function ObservationsClient() {
                   <span className="rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground">
                     {labelFor(TREND_STATE_OPTIONS, obs.marketEnvironment)}
                   </span>
+                  {obs.noTrade && (
+                    <span className="rounded-full bg-amber-500/10 px-2 py-0.5 text-xs font-semibold text-amber-600 dark:text-amber-400">
+                      NO TRADE
+                    </span>
+                  )}
                 </div>
                 {obs.notes && (
                   <p className="mt-1.5 line-clamp-2 text-sm text-foreground">{obs.notes}</p>

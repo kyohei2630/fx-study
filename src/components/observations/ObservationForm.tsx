@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import { Field, Input, Select, Textarea } from "@/components/ui/Field";
+import { Checkbox, Field, Input, Select, Textarea } from "@/components/ui/Field";
 import {
   INDICATOR_STATE_OPTIONS,
   TIMEFRAME_OPTIONS,
@@ -23,6 +23,10 @@ const EMPTY_DRAFT: ObservationDraft = {
   high: null,
   low: null,
   importantLevels: "",
+  structure: "",
+  priceAction: "",
+  scenario: "",
+  noTrade: false,
   emaState: "unset",
   bbState: "unset",
   atrState: "unset",
@@ -154,6 +158,36 @@ export function ObservationForm({
           placeholder="前日高値 158.20、週足レジスタンス 159.00 など"
         />
       </Field>
+
+      <Field label="相場構造" optional>
+        <Textarea
+          value={draft.structure}
+          onChange={(e) => update("structure", e.target.value)}
+          placeholder="HH→HLが継続中、直近安値を割り込めば構造変化の可能性 など"
+        />
+      </Field>
+
+      <Field label="Price Action" optional>
+        <Textarea
+          value={draft.priceAction}
+          onChange={(e) => update("priceAction", e.target.value)}
+          placeholder="重要高値付近でPin Bar形成、長い上ヒゲで反発 など"
+        />
+      </Field>
+
+      <Field label="シナリオ" optional>
+        <Textarea
+          value={draft.scenario}
+          onChange={(e) => update("scenario", e.target.value)}
+          placeholder="このレジスタンスを上抜ければ上昇継続、反落すればレンジ継続 など"
+        />
+      </Field>
+
+      <Checkbox
+        label="この場面はNO TRADE（見送り）が合理的だと判断した"
+        checked={draft.noTrade}
+        onChange={(e) => update("noTrade", e.target.checked)}
+      />
 
       <div>
         <p className="text-sm font-medium text-foreground">インジケーター状態</p>

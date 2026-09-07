@@ -58,3 +58,20 @@ export function Select({
 }: SelectHTMLAttributes<HTMLSelectElement>) {
   return <select className={cn(controlClasses, className)} {...props} />;
 }
+
+export function Checkbox({
+  label,
+  className,
+  ...props
+}: InputHTMLAttributes<HTMLInputElement> & { label: string }) {
+  return (
+    <label className={cn("flex items-center gap-2 text-sm text-foreground", className)}>
+      <input
+        type="checkbox"
+        className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
+        {...props}
+      />
+      {label}
+    </label>
+  );
+}

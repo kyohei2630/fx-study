@@ -8,6 +8,7 @@ import type {
   Lesson,
   Observation,
   Quiz,
+  ScenarioPlan,
   Strategy,
   StrategyVersion,
   Trade,
@@ -29,11 +30,12 @@ export class FxDatabase extends Dexie {
   tradeConditions!: EntityTable<TradeCondition, "id">;
   backtests!: EntityTable<Backtest, "id">;
   improvementNotes!: EntityTable<ImprovementNote, "id">;
+  scenarios!: EntityTable<ScenarioPlan, "id">;
 
   constructor() {
     super("fx-learning-app");
 
-    this.version(1).stores({
+    const v1Stores = {
       learningProgress: "id, lessonId, status, updatedAt",
       lessons: "id, step, order",
       quizzes: "id, lessonId",
@@ -47,6 +49,13 @@ export class FxDatabase extends Dexie {
       tradeConditions: "id, tradeId, category",
       backtests: "id, date, symbol, hypothesisId, strategyId, strategyVersionId, createdAt",
       improvementNotes: "id, strategyId, strategyVersionId, decision, createdAt",
+    };
+
+    this.version(1).stores(v1Stores);
+
+    this.version(2).stores({
+      ...v1Stores,
+      scenarios: "id, date, symbol, timeframe, createdAt",
     });
   }
 }
@@ -65,6 +74,7 @@ export const TABLE_NAMES = [
   "tradeConditions",
   "backtests",
   "improvementNotes",
+  "scenarios",
 ] as const;
 
 export type TableName = (typeof TABLE_NAMES)[number];
