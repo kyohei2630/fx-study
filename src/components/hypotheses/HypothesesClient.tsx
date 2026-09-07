@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { HypothesisForm, type HypothesisDraft } from "@/components/hypotheses/HypothesisForm";
 import { generateId } from "@/db/repository";
-import { hypothesesRepo } from "@/db/repositories";
+import { backtestsRepo, hypothesesRepo } from "@/db/repositories";
 import { HYPOTHESIS_STATUS_OPTIONS, labelFor } from "@/lib/options";
 import type { Hypothesis, HypothesisStatus } from "@/types";
 import { cn } from "@/lib/utils";
@@ -23,13 +23,20 @@ const STATUS_STYLES: Record<HypothesisStatus, string> = {
 
 export function HypothesesClient() {
   const [items, setItems] = useState<Hypothesis[]>([]);
+  const [verificationCounts, setVerificationCounts] = useState<Record<string, number>>({});
   const [loaded, setLoaded] = useState(false);
   const [view, setView] = useState<View>({ mode: "list" });
 
   async function refresh() {
-    const all = await hypothesesRepo.list();
+    const [all, backtests] = await Promise.all([hypothesesRepo.list(), backtestsRepo.list()]);
     all.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+    const counts: Record<string, number> = {};
+    for (const b of backtests) {
+      if (!b.hypothesisId) continue;
+      counts[b.hypothesisId] = (counts[b.hypothesisId] ?? 0) + 1;
+    }
     setItems(all);
+    setVerificationCounts(counts);
     setLoaded(true);
   }
 
@@ -45,7 +52,6 @@ export function HypothesesClient() {
       await hypothesesRepo.add({
         ...draft,
         id: generateId(),
-        verificationCount: 0,
         createdAt: now,
         updatedAt: now,
       });
@@ -128,7 +134,7 @@ export function HypothesesClient() {
                   <p className="mt-1.5 line-clamp-2 text-sm text-foreground">{h.description}</p>
                 )}
                 <p className="mt-1 text-xs text-muted-foreground">
-                  {h.symbol} ・ {h.timeframe} ・ 検証数 {h.verificationCount}
+                  {h.symbol} ・ {h.timeframe} ・ 検証数 {verificationCounts[h.id] ?? 0}
                 </p>
               </button>
               <button

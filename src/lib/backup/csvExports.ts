@@ -17,6 +17,8 @@ const TRADE_COLUMNS: CsvColumn<Trade>[] = [
   { key: "exit", label: "Exit", value: (t) => t.exit },
   { key: "result", label: "結果", value: (t) => t.result },
   { key: "rMultiple", label: "R", value: (t) => t.rMultiple },
+  { key: "structure", label: "相場構造", value: (t) => t.structure },
+  { key: "priceAction", label: "Price Action", value: (t) => t.priceAction },
   { key: "ruleCompliant", label: "ルール遵守", value: (t) => (t.ruleCompliant === null ? "" : t.ruleCompliant ? "遵守" : "違反") },
   { key: "preTradeNote", label: "トレード前の考え", value: (t) => t.preTradeNote },
   { key: "postTradeNote", label: "トレード後の反省", value: (t) => t.postTradeNote },

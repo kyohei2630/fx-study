@@ -45,7 +45,6 @@ export interface Hypothesis {
   expectedR: number | null;
   conditions: string[];
   status: HypothesisStatus;
-  verificationCount: number;
   createdAt: string;
   updatedAt: string;
 }

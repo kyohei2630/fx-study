@@ -20,6 +20,8 @@ function trade(overrides: Partial<Trade>): Trade {
     strategyVersionId: "v1",
     marketEnvironment: "unclear",
     higherTimeframeDirection: "unclear",
+    structure: "",
+    priceAction: "",
     ruleCompliant: true,
     psychologyTags: [],
     preTradeNote: "",

@@ -8,10 +8,7 @@ import { Field, Input, Select, Textarea } from "@/components/ui/Field";
 import { HYPOTHESIS_STATUS_OPTIONS, TIMEFRAME_OPTIONS } from "@/lib/options";
 import type { Hypothesis } from "@/types";
 
-export type HypothesisDraft = Omit<
-  Hypothesis,
-  "id" | "createdAt" | "updatedAt" | "verificationCount"
->;
+export type HypothesisDraft = Omit<Hypothesis, "id" | "createdAt" | "updatedAt">;
 
 const EMPTY_DRAFT: HypothesisDraft = {
   title: "",

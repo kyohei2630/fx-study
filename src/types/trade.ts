@@ -25,6 +25,8 @@ export interface Trade {
   strategyVersionId: string | null;
   marketEnvironment: TrendState;
   higherTimeframeDirection: TrendState;
+  structure: string;
+  priceAction: string;
   ruleCompliant: boolean | null;
   psychologyTags: PsychologyTag[];
   preTradeNote: string;

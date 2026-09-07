@@ -24,6 +24,8 @@ export interface TradeEntryDraft {
   strategyVersionId: string | null;
   marketEnvironment: TrendState;
   higherTimeframeDirection: TrendState;
+  structure: string;
+  priceAction: string;
   preTradeNote: string;
 }
 
@@ -43,6 +45,8 @@ function toDraft(trade?: Trade): TradeEntryDraft {
       strategyVersionId: null,
       marketEnvironment: "unclear",
       higherTimeframeDirection: "unclear",
+      structure: "",
+      priceAction: "",
       preTradeNote: "",
     };
   }
@@ -59,6 +63,8 @@ function toDraft(trade?: Trade): TradeEntryDraft {
     strategyVersionId: trade.strategyVersionId,
     marketEnvironment: trade.marketEnvironment,
     higherTimeframeDirection: trade.higherTimeframeDirection,
+    structure: trade.structure,
+    priceAction: trade.priceAction,
     preTradeNote: trade.preTradeNote,
   };
 }
@@ -217,6 +223,23 @@ export function TradeEntryForm({
                 </option>
               ))}
           </Select>
+        </Field>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Field label="相場構造" optional>
+          <Textarea
+            value={draft.structure}
+            onChange={(e) => update("structure", e.target.value)}
+            placeholder="HH→HLが継続中 など"
+          />
+        </Field>
+        <Field label="Price Action" optional>
+          <Textarea
+            value={draft.priceAction}
+            onChange={(e) => update("priceAction", e.target.value)}
+            placeholder="重要高値でPin Bar形成 など"
+          />
         </Field>
       </div>
 
