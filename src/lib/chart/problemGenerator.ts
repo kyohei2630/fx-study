@@ -352,12 +352,15 @@ function buildTrendJudgement(
     { id: "uptrend", label: "上昇トレンド" },
     { id: "downtrend", label: "下降トレンド" },
     { id: "range", label: "レンジ" },
+    { id: "unclear", label: "判断困難" },
   ];
 
   const explanations: Record<typeof verdict, string> = {
     uptrend: "直近の高値・安値がともに切り上がっており（HH・HL）、上昇トレンドと判断できます。",
     downtrend: "直近の高値・安値がともに切り下がっており（LL・LH）、下降トレンドと判断できます。",
     range: "高値・安値が明確な方向を持たず、一定範囲を往復しているためレンジと判断できます。",
+    unclear:
+      "明確なスイング高値・安値がまだ十分に形成されておらず、トレンドかレンジかを無理に判断できる材料がありません。このような場面では「判断困難」と答えるのが合理的です。",
   };
 
   return {

@@ -76,10 +76,15 @@ export function classifyTrend(swings: SwingPoint[]): MarketVerdict {
   const highs = swings.filter((p) => p.kind === "high").slice(-2);
   const lows = swings.filter((p) => p.kind === "low").slice(-2);
 
-  const risingHighs = highs.length === 2 && highs[1].tag === "HH";
-  const risingLows = lows.length === 2 && lows[1].tag === "HL";
-  const fallingHighs = highs.length === 2 && highs[1].tag === "LH";
-  const fallingLows = lows.length === 2 && lows[1].tag === "LL";
+  // Fewer than two swing highs/lows means there isn't enough structure to
+  // read a trend from at all — "判断困難" is the honest answer here, not a
+  // guess dressed up as "range".
+  if (highs.length < 2 || lows.length < 2) return "unclear";
+
+  const risingHighs = highs[1].tag === "HH";
+  const risingLows = lows[1].tag === "HL";
+  const fallingHighs = highs[1].tag === "LH";
+  const fallingLows = lows[1].tag === "LL";
 
   if (risingHighs && risingLows) return "uptrend";
   if (fallingHighs && fallingLows) return "downtrend";

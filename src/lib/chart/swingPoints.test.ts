@@ -77,6 +77,14 @@ describe("classifyTrend", () => {
     expect(classifyTrend(swings)).toBe("downtrend");
   });
 
+  it("classifies too few swings to judge as unclear rather than guessing range", () => {
+    const swings = [
+      { index: 0, price: 10, kind: "low" as const, tag: null, importance: 0 },
+      { index: 1, price: 15, kind: "high" as const, tag: null, importance: 0 },
+    ];
+    expect(classifyTrend(swings)).toBe("unclear");
+  });
+
   it("classifies a mixed sequence as range", () => {
     const swings = [
       { index: 0, price: 10, kind: "low" as const, tag: null, importance: 0 },

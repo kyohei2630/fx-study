@@ -16,4 +16,4 @@ export interface SwingPoint {
   importance: number;
 }
 
-export type MarketVerdict = "uptrend" | "downtrend" | "range";
+export type MarketVerdict = "uptrend" | "downtrend" | "range" | "unclear";
