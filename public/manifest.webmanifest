@@ -1,7 +1,7 @@
 {
-  "name": "FX学習・戦略研究アプリ",
-  "short_name": "FX研究",
-  "description": "チャートを読む力・仮説を立てる力・検証する力を鍛えるFX学習&戦略研究アプリ",
+  "name": "FX Training Lab",
+  "short_name": "Training Lab",
+  "description": "Learn the Market. Read the Chart. Test Your Ideas. チャートを読む力・仮説を立てる力・検証する力を鍛えるFX学習&戦略研究アプリ",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

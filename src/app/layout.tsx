@@ -16,14 +16,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FX研究ノート",
+  title: "FX Training Lab",
   description:
-    "チャートを読む力・仮説を立てる力・検証する力を鍛える、個人用FX学習・戦略研究アプリ",
+    "Learn the Market. Read the Chart. Test Your Ideas. チャートを読む力・仮説を立てる力・検証する力を鍛える、個人用FX学習・戦略研究アプリ",
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "FX研究ノート",
+    title: "FX Training Lab",
   },
   icons: {
     icon: "/icons/icon-192.png",

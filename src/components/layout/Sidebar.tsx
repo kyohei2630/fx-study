@@ -13,7 +13,7 @@ export function Sidebar() {
     <aside className="hidden md:flex md:w-60 md:flex-col md:border-r md:border-border md:bg-surface md:py-6">
       <div className="px-5 pb-6">
         <span className="text-lg font-bold tracking-tight text-foreground">
-          FX研究ノート
+          FX Training Lab
         </span>
       </div>
       <nav className="flex flex-1 flex-col gap-1 px-3">
