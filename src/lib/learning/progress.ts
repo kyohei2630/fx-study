@@ -30,6 +30,22 @@ export async function markLessonOpened(lessonId: string): Promise<void> {
   });
 }
 
+export async function markUnderstandingChecked(lessonId: string): Promise<void> {
+  const existing = await learningProgressRepo.get(progressId(lessonId));
+  if (existing && (existing.status === "practicing" || existing.status === "completed")) {
+    return;
+  }
+
+  await learningProgressRepo.upsert({
+    id: progressId(lessonId),
+    lessonId,
+    status: "comprehension_check",
+    score: existing?.score ?? null,
+    completedAt: existing?.completedAt ?? null,
+    updatedAt: new Date().toISOString(),
+  });
+}
+
 export async function recordQuizResult(
   lessonId: string,
   correctCount: number,

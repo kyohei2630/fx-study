@@ -1,11 +1,19 @@
 import type { LearningStatus } from "@/types/common";
 
+export interface LessonSection {
+  id: string;
+  title: string;
+  body: string;
+}
+
 export interface Lesson {
   id: string;
   step: number;
   title: string;
   description: string;
-  content: string;
+  category: string;
+  content?: string;
+  sections?: LessonSection[];
   order: number;
   required: boolean;
 }

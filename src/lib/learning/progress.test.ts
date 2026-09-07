@@ -4,6 +4,7 @@ import {
   computeOverallPercent,
   getProgressMap,
   markLessonOpened,
+  markUnderstandingChecked,
   recordQuizResult,
 } from "@/lib/learning/progress";
 
@@ -51,6 +52,30 @@ describe("learning progress", () => {
 
     const map = await getProgressMap();
     expect(map.candlestick.status).toBe("completed");
+  });
+
+  it("advances an opened lesson to comprehension_check", async () => {
+    await markLessonOpened("candlestick");
+    await markUnderstandingChecked("candlestick");
+
+    const map = await getProgressMap();
+    expect(map.candlestick.status).toBe("comprehension_check");
+  });
+
+  it("does not downgrade a completed lesson when re-checking understanding", async () => {
+    await recordQuizResult("candlestick", 2, 2);
+    await markUnderstandingChecked("candlestick");
+
+    const map = await getProgressMap();
+    expect(map.candlestick.status).toBe("completed");
+  });
+
+  it("does not downgrade a practicing lesson when re-checking understanding", async () => {
+    await recordQuizResult("candlestick", 1, 2);
+    await markUnderstandingChecked("candlestick");
+
+    const map = await getProgressMap();
+    expect(map.candlestick.status).toBe("practicing");
   });
 
   it("computes overall percent from completed lessons only", () => {

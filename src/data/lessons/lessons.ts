@@ -8,6 +8,7 @@ export const LESSONS: Lesson[] = [
     step: 1,
     order: 1,
     required: true,
+    category: "ローソク足",
     title: "ローソク足",
     description: "始値・高値・安値・終値と、実体・ヒゲの意味を理解する",
     content: `ローソク足は、一定期間の値動きを「始値・高値・安値・終値」の4つの価格でまとめて表したものです。
@@ -31,6 +32,7 @@ export const LESSONS: Lesson[] = [
     step: 2,
     order: 2,
     required: true,
+    category: "高値・安値",
     title: "高値・安値",
     description:
       "最高値・直近高値・スイング高値・重要高値の違いを区別できるようになる",
@@ -77,6 +79,7 @@ export const LESSONS: Lesson[] = [
     step: 3,
     order: 3,
     required: true,
+    category: "チャートの見方",
     title: "チャートの見方",
     description: "チャートを見るときに、どの順番でどこを見るかを知る",
     content: `インジケーターから見始めると、価格そのものを見る力が育ちません。このアプリでは、次の順番でチャートを見ることを基本にします。
@@ -100,6 +103,7 @@ export const LESSONS: Lesson[] = [
     step: 4,
     order: 4,
     required: true,
+    category: "相場構造",
     title: "相場構造",
     description: "高値・安値の連続から、相場の構造を読み取る",
     content: `相場構造とは、高値・安値がどのように連続して形成されているかを見ることです。
@@ -122,6 +126,7 @@ export const LESSONS: Lesson[] = [
     step: 5,
     order: 5,
     required: true,
+    category: "トレンド・レンジ",
     title: "トレンド・レンジ",
     description: "上昇・下降トレンドとレンジの見分け方",
     content: `# トレンド
@@ -141,6 +146,7 @@ export const LESSONS: Lesson[] = [
     step: 6,
     order: 6,
     required: true,
+    category: "重要価格帯",
     title: "重要価格帯",
     description: "前日高値・安値など、多くのトレーダーに意識される価格を知る",
     content: `多くの市場参加者が意識している価格帯は、反発やブレイクが起こりやすいポイントになります。
@@ -162,6 +168,7 @@ export const LESSONS: Lesson[] = [
     step: 7,
     order: 7,
     required: true,
+    category: "マルチタイムフレーム",
     title: "時間足とマルチタイムフレーム分析",
     description: "時間足の種類と、上位足・下位足を組み合わせた分析",
     content: `# 時間足の種類
@@ -183,6 +190,7 @@ export const LESSONS: Lesson[] = [
     step: 8,
     order: 8,
     required: true,
+    category: "インジケーター",
     title: "EMA（指数平滑移動平均線）",
     description: "EMAを売買シグナルとしてではなく、傾向を把握する情報として使う",
     content: `EMA（Exponential Moving Average）は直近の価格に比重を置いた移動平均線です。SMA（単純移動平均線）より値動きへの反応が速い特徴があります。
@@ -199,6 +207,7 @@ export const LESSONS: Lesson[] = [
     step: 9,
     order: 9,
     required: true,
+    category: "インジケーター",
     title: "ボリンジャーバンド",
     description: "価格の位置とボラティリティを把握するための情報として使う",
     content: `ボリンジャーバンドは、移動平均線（中央線）と、そこからの標準偏差（σ）で構成されるバンドです。
@@ -220,6 +229,7 @@ export const LESSONS: Lesson[] = [
     step: 10,
     order: 10,
     required: true,
+    category: "インジケーター",
     title: "ATR（Average True Range）",
     description: "ボラティリティを数値化し、ストップ幅の設計に応用する",
     content: `ATRは値幅（ボラティリティ）を数値化した指標です。
@@ -236,6 +246,7 @@ export const LESSONS: Lesson[] = [
     step: 11,
     order: 11,
     required: true,
+    category: "インジケーター",
     title: "RSI（Relative Strength Index）",
     description: "0〜100で表されるモメンタム指標の読み方",
     content: `RSIは0〜100の範囲で、値動きの勢い（モメンタム）を表す指標です。
@@ -254,6 +265,7 @@ export const LESSONS: Lesson[] = [
     step: 12,
     order: 12,
     required: true,
+    category: "インジケーター",
     title: "MACD",
     description: "MACDとシグナルの関係、ヒストグラムの読み方",
     content: `MACDは2本の移動平均線の差を利用してトレンドの勢いを見る指標です。

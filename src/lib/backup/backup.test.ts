@@ -13,6 +13,7 @@ function makeLesson(overrides: Partial<Lesson> = {}): Lesson {
     step: 1,
     title: "ローソク足とは",
     description: "",
+    category: "ローソク足",
     content: "",
     order: 1,
     required: true,

@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Check, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, ClipboardCheck, X } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { LessonBody } from "@/components/learning/LessonBody";
@@ -12,9 +12,13 @@ import { QUIZZES_BY_LESSON } from "@/data/lessons/quizzes";
 import {
   getProgressMap,
   markLessonOpened,
+  markUnderstandingChecked,
   recordQuizResult,
 } from "@/lib/learning/progress";
+import { gradeQuiz } from "@/lib/learning/quiz";
 import type { LearningStatus } from "@/types";
+
+const GATED_STATUSES: LearningStatus[] = ["not_started", "in_progress"];
 
 export function LessonDetailClient({ lessonId }: { lessonId: string }) {
   const lesson = LESSONS_BY_ID[lessonId];
@@ -43,9 +47,16 @@ export function LessonDetailClient({ lessonId }: { lessonId: string }) {
   const prevLesson = LESSONS[currentIndex - 1];
   const nextLesson = LESSONS[currentIndex + 1];
   const allAnswered = quizzes.every((q) => answers[q.id]);
+  const gated = quizzes.length > 0 && GATED_STATUSES.includes(status);
+
+  async function handleCheckUnderstanding() {
+    await markUnderstandingChecked(lessonId);
+    const map = await getProgressMap();
+    setStatus(map[lessonId]?.status ?? "comprehension_check");
+  }
 
   async function handleSubmit() {
-    const correct = quizzes.filter((q) => answers[q.id] === q.answer).length;
+    const { correctCount: correct } = gradeQuiz(quizzes, answers);
     setCorrectCount(correct);
     setSubmitted(true);
     const newStatus = await recordQuizResult(lessonId, correct, quizzes.length);
@@ -81,10 +92,27 @@ export function LessonDetailClient({ lessonId }: { lessonId: string }) {
       </div>
 
       <Card>
-        <LessonBody content={lesson.content} />
+        <LessonBody content={lesson.content} sections={lesson.sections} />
       </Card>
 
-      {quizzes.length > 0 && (
+      {gated && (
+        <Card className="flex flex-col items-center gap-3 py-8 text-center">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+            <ClipboardCheck className="h-6 w-6 text-primary" />
+          </div>
+          <div>
+            <p className="font-semibold text-foreground">
+              レッスンを読み終えたら、理解度を確認しましょう
+            </p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              下のボタンを押すと、理解確認クイズに進めます。
+            </p>
+          </div>
+          <Button onClick={handleCheckUnderstanding}>理解度を確認する</Button>
+        </Card>
+      )}
+
+      {!gated && quizzes.length > 0 && (
         <Card>
           <h2 className="text-base font-bold text-foreground">理解確認クイズ</h2>
           <p className="mt-1 text-sm text-muted-foreground">

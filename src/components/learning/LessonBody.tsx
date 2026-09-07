@@ -1,3 +1,5 @@
+import type { LessonSection } from "@/types";
+
 type Block =
   | { type: "heading"; text: string }
   | { type: "paragraph"; text: string }
@@ -60,9 +62,7 @@ function parseContent(content: string): Block[] {
   return blocks;
 }
 
-export function LessonBody({ content }: { content: string }) {
-  const blocks = parseContent(content);
-
+function BlockList({ blocks }: { blocks: Block[] }) {
   return (
     <div className="space-y-4">
       {blocks.map((block, index) => {
@@ -111,4 +111,32 @@ export function LessonBody({ content }: { content: string }) {
       })}
     </div>
   );
+}
+
+export function LessonBody({
+  content,
+  sections,
+}: {
+  content?: string;
+  sections?: LessonSection[];
+}) {
+  if (sections && sections.length > 0) {
+    return (
+      <div className="space-y-6">
+        {sections.map((section, index) => (
+          <div
+            key={section.id}
+            className={index > 0 ? "border-t border-border pt-6" : undefined}
+          >
+            <h2 className="text-base font-bold text-foreground">{section.title}</h2>
+            <div className="mt-3">
+              <BlockList blocks={parseContent(section.body)} />
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  return <BlockList blocks={parseContent(content ?? "")} />;
 }
