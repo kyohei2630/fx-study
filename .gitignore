@@ -21,6 +21,8 @@
 /build
 
 # misc
+# Claude Code local worktrees (each one carries its own node_modules)
+/.claude/worktrees/
 .DS_Store
 *.pem
 
